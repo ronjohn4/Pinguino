@@ -26,11 +26,11 @@ TODO: run monkey testing
 TODO: reset should go back to the last edit, not reload the file
 
 TODO: automated tests
-TODO: source control
 TODO: split the application config (persist) from the list of photos
 TODO: photo management should be a object
 TODO: Figure out the apk signing problem
 
+1/1 - source control
 12/13 - use file paths rather than uri when possible
 12/07 - improve config page
 12/07 - improve instructions
