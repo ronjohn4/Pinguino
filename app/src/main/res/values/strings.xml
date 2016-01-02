@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Pinguino</string>
+    <string name="InstructionsFirstTime">Welcome! The first (and only) thing you need to do is select a
+photo of YOU to insert into photos you share.</string>
+    <string name="InstructionsNextTime">Excellent!  Now look for me the next time you share a photo.</string>
+    <string name="InstructionsPhotoEdit">Nice photo!  Touch the background to make it transparent (red).</string>
+
+    <string name="ButtonFirstTime">"Select 1st photo of You"</string>
+    <string name="ButtonNextTime">"Select a new photo of You"</string>
+</resources>

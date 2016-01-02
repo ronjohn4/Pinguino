@@ -1,0 +1,38 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 21
+    buildToolsVersion "22.0.1"
+
+    signingConfigs {
+        release {
+            storeFile file("pinguino.keystore")
+            storePassword "tiller9ke"
+            keyAlias "pinguino"
+            keyPassword "tiller9pi"
+        }
+    }
+
+    defaultConfig {
+        applicationId "com.retsworks.pinguino"
+        minSdkVersion 18
+        targetSdkVersion 21
+        versionCode 4
+        versionName "4.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            debuggable true
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile 'com.android.support:appcompat-v7:21.0.3'
+    compile 'com.android.support:support-v4:21.0.3'
+}
