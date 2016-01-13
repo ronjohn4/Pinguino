@@ -5,31 +5,23 @@
 
 /*
 Dev Diary
-
-Alpha 1 feedback
-TODO: handle portrait photos by trimming the source photo when making transparent
-TODO: handle portrait pinguino photos
-TODO: config to resize based on screen and/or scroll
-
-Normal
 TODO: add tracking
 TODO: add purchase
-TODO: Share config between instances?  Save to cloud.  Requires authentication.
-TODO: set Left/Right for each pinguino photo
 TODO: send multiple SM photos
-TODO: save config for multiple pinguino photos using SQLite
 TODO: if messenger has photo attached already, overwrite with new composite?
-TODO: Support tablets
 TODO: move image loads to new thread
 TODO: instrument potential thread sections and get timing results, use logs
 TODO: run monkey testing
 TODO: reset should go back to the last edit, not reload the file
-
 TODO: automated tests
-TODO: split the application config (persist) from the list of photos
 TODO: photo management should be a object
 TODO: Figure out the apk signing problem
 
+TODO: Support tablets
+
+1/12 - config to resize based on screen and/or scroll
+1/7 - handle portrait photos by trimming the source photo when making transparent
+1/7 - handle portrait pinguino photos
 1/1 - source control
 12/13 - use file paths rather than uri when possible
 12/07 - improve config page
@@ -78,8 +70,8 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.net.Uri;
 import android.provider.MediaStore;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.format.Time;
 import android.util.Log;
 
@@ -89,9 +81,10 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends AppCompatActivity {
     String TAG = "PINGUINO-MainActivity";
-    float PctSelfieSize = 0.5f;
+    float PctSelfieSizeLandscrape = 0.5f;
+    float PctSelfieSizePortrait = 1.0f;
     PhotoEntry spSettings;
 
 
@@ -210,11 +203,20 @@ public class MainActivity extends ActionBarActivity {
             int topImageWidth = topImage.getWidth();
             int topImageHeight = topImage.getHeight();
 
-            Float ratio1 = Float.valueOf(bottomImageWidth * PctSelfieSize);
-            Float ratio2 = ratio1 / topImageWidth;
+            float PctSelfieSize;
+            if (bottomImage.getWidth() > bottomImage.getHeight()) {
+                PctSelfieSize = PctSelfieSizeLandscrape;
+            }
+            else {
+                PctSelfieSize = PctSelfieSizePortrait;
+            }
+            float ratio1 = bottomImageWidth * PctSelfieSize;
+
+            float ratio2 = ratio1 / topImageWidth;
             int finalheight = (int) (ratio2 * topImageHeight);
 
-            Bitmap topImagemutable = Bitmap.createScaledBitmap(topImage, bottomImageWidth / 2,
+            Bitmap topImagemutable = Bitmap.createScaledBitmap(topImage,
+                    (int)(bottomImageWidth * PctSelfieSize),
                     finalheight, false);
 
             //combine bottom image and top image

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
+      <item android:id="@+id/done"
+            android:icon="@drawable/ic_done_white_36dp"
+            app:showAsAction="ifRoom"
+            android:title="Done"/>
+      <item android:id="@+id/reset"
+            android:icon="@drawable/ic_undo_white_36dp"
+            app:showAsAction="ifRoom"
+            android:title="Reset"/>
+      <item android:id="@+id/cancel"
+            android:icon="@drawable/ic_cancel_white_36dp"
+            app:showAsAction="ifRoom"
+            android:title="Cancel"/>
+      <item android:id="@+id/help"
+            android:icon="@drawable/ic_help_outline_white_36pt"
+            app:showAsAction="ifRoom"
+            android:title="Help"/>
+      <item android:id="@+id/about"
+            android:icon="@drawable/ic_info_outline_white_36dp"
+            app:showAsAction="ifRoom"
+            android:title="About"/>
+</menu>

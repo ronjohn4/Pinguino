@@ -14,11 +14,15 @@ import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -28,13 +32,22 @@ import java.io.IOException;
 import java.io.InputStream;
 
 
-public class NewPhotoActivity extends Activity {
+public class NewPhotoActivity extends AppCompatActivity {
     String TAG = "PINGUINO-NewPhotoActivity";
     PhotoEntry spSettings;
     ImageView imageviewEdit;
     Bitmap bitmapEdit;
     float hueDistance = 5.0f;
     private int fieldImgXY[] = new int[2];
+    String newTempFile = "";
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.new_photo_menu, menu);
+        return true;
+    }
 
 
     @Override
@@ -52,12 +65,15 @@ public class NewPhotoActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_photo);
 
+        //persistence is through the settings object not a bundle
+        SettingsContract sc = new SettingsContract();
+        spSettings = sc.loadSettings(this);
 //        if (savedInstanceState != null) {
 //              restore values saved in the Bundle
 //        }
 
         Intent intent = getIntent();
-        final String newTempFile = intent.getStringExtra("TempNewPhoto");
+        newTempFile = intent.getStringExtra("TempNewPhoto");
 
         Log.d(TAG,"NewPhotoActivity.onCreate() - newpath:" + newTempFile);
 
@@ -121,31 +137,22 @@ public class NewPhotoActivity extends Activity {
             }
         });
 
-        Button resetbutton = (Button)findViewById(R.id.buttonReset);
-        resetbutton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                try {
-                    resetFiles(newTempFile);
-                    bitmapEdit = fetchBitmapFromTempFile(newTempFile);
-                    imageviewEdit.setImageBitmap(bitmapEdit);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-
-        Button buttonCancel = (Button)findViewById(R.id.buttonCancel);
-        buttonCancel.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                finish();
-            }
-
-        });
+    }
 
 
-        Button buttonDone = (Button)findViewById(R.id.buttonDone);
-        buttonDone.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.about:
+                Intent browserIntentAbout = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.ronjohnsonconsulting.com/pinguino"));
+                startActivity(browserIntentAbout);
+                return true;
+            case R.id.help:
+                Intent browserIntentHelp = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.ronjohnsonconsulting.com/pinguino"));
+                startActivity(browserIntentHelp);
+                return true;
+            case R.id.done:
                 try {
                     Log.d(TAG, "saveTempFileToApp()");
                     saveTempFileToApp(newTempFile);
@@ -154,16 +161,31 @@ public class NewPhotoActivity extends Activity {
                     spSettings = sc.loadSettings(getApplicationContext());
                     Log.d(TAG, "setPhotoPathName()");
                     spSettings.setPhotoPathName(newTempFile);
-                    sc.saveSettings(getApplicationContext(),spSettings);
+                    sc.saveSettings(getApplicationContext(), spSettings);
+
+                    Intent returnIntent = new Intent(); //calling activity will reload
+                    setResult(Activity.RESULT_OK, returnIntent);
 
                     finish();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-            }
-
-        });
-
+                return true;
+            case R.id.cancel:
+                finish();
+                return true;
+            case R.id.reset:
+                try {
+                    resetFiles(newTempFile);
+                    bitmapEdit = fetchBitmapFromTempFile(newTempFile);
+                    imageviewEdit.setImageBitmap(bitmapEdit);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
 
@@ -177,9 +199,11 @@ public class NewPhotoActivity extends Activity {
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         SettingsContract sc = new SettingsContract();
+        Log.d(TAG,"getDefaultPhoto()-" + spSettings.getDefaultPhoto());
+        Log.d(TAG, "getPhotoPathName()-" + String.valueOf(spSettings.getPhotoPathName()));
         sc.saveSettings(this, spSettings);
         saveWorkingImage();
-//        outState.putString("message", "This is my message to be reloaded");
+
         Log.d(TAG,"onSaveInstanceState");
     }
 
@@ -322,9 +346,10 @@ public class NewPhotoActivity extends Activity {
         String fname = new File(appDir + "/" + requestedFile).getAbsolutePath();
 
         Log.d(TAG,"fname:" + fname);
-        Log.d(TAG,"appDir:" + appDir);
+        Log.d(TAG, "appDir:" + appDir);
         Bitmap bitmapReturn =  BitmapFactory.decodeFile(fname);
 
         return bitmapReturn;
     }
+
 }

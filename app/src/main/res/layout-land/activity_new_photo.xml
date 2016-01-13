@@ -2,29 +2,33 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_height="wrap_content"
             android:layout_width="match_parent">
+
     <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
+
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Instructions on how to create a selfie photo."
             android:id="@+id/textEditPhotoInstructions"
             android:layout_margin="10dp"
-            android:text="Instructions on how to create a selfie photo."
-            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_weight="2"
             android:layout_alignParentTop="true"/>
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/imageEdit"
-            android:layout_margin="10dp"
             android:src="@drawable/pinguinosharedone"
-            android:layout_alignParentStart="true"
             android:layout_centerHorizontal="true"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
             android:background="@android:color/holo_red_dark"
             android:longClickable="false"
             android:scaleType="fitXY"
             android:adjustViewBounds="true"/>
+
     </LinearLayout>
 </ScrollView>

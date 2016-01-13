@@ -7,4 +7,5 @@ photo of YOU to insert into photos you share.</string>
 
     <string name="ButtonFirstTime">"Select 1st photo of You"</string>
     <string name="ButtonNextTime">"Select a new photo of You"</string>
+    <string name="title_activity_main2">Main2Activity</string>
 </resources>
