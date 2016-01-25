@@ -17,4 +17,10 @@
         <item name="android:background">@color/black_overlay</item>
     </style>
 
+    <style name="HelpStyle" parent="@android:style/TextAppearance.Large">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">@dimen/text_margin</item>
+    </style>
+
 </resources>

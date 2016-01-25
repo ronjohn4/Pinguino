@@ -144,13 +144,12 @@ public class NewPhotoActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
         switch (item.getItemId()) {
-            case R.id.about:
-                Intent browserIntentAbout = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.ronjohnsonconsulting.com/pinguino"));
-                startActivity(browserIntentAbout);
-                return true;
             case R.id.help:
-                Intent browserIntentHelp = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.ronjohnsonconsulting.com/pinguino"));
-                startActivity(browserIntentHelp);
+                Intent helpActivity = new Intent();
+                helpActivity.setClassName("com.retsworks.pinguino",
+                        "com.retsworks.pinguino.HelpActivity");
+                startActivity(helpActivity);
+                this.finish();
                 return true;
             case R.id.done:
                 try {

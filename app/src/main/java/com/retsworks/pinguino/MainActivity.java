@@ -10,15 +10,12 @@ TODO: add purchase
 TODO: send multiple SM photos
 TODO: if messenger has photo attached already, overwrite with new composite?
 TODO: move image loads to new thread
-TODO: instrument potential thread sections and get timing results, use logs
-TODO: run monkey testing
+TODO: add timing to potential thread sections and get timing results, use logs
 TODO: reset should go back to the last edit, not reload the file
 TODO: automated tests
 TODO: photo management should be a object
-TODO: Figure out the apk signing problem
 
-TODO: Support tablets
-
+1/21 -  Support tablets
 1/12 - config to resize based on screen and/or scroll
 1/7 - handle portrait photos by trimming the source photo when making transparent
 1/7 - handle portrait pinguino photos

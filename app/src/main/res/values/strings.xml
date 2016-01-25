@@ -8,4 +8,26 @@ photo of YOU to insert into photos you share.</string>
     <string name="ButtonFirstTime">"Select 1st photo of You"</string>
     <string name="ButtonNextTime">"Select a new photo of You"</string>
     <string name="title_activity_main2">Main2Activity</string>
+    <string name="urlHelp">"http://www.ronjohnsonconsulting.com/pinguino/help"</string>
+    <string name="urlAbout">"http://www.ronjohnsonconsulting.com/pinguino/about"</string>
+    <string name="title_activity_help">Help</string>
+
+    <!--Test the HTML in an .html file with a browser then copy here-->
+    <string name="help_text">
+        <![CDATA[
+        <b>What is Pinguino?</b>
+        <p>Pinguino lets you share photos the same as IM or SMS but it inserts YOU into the photo
+        like you were taking a Selfie.  Select Pinguino when you share a photo only when you want
+        your image inserted, otherwise use IM or SMS.</p>
+        <b>First Time Here?</b>
+        <p>Easy, all you need to do is select a photo of YOU.  Use the menu to select a photo.
+        The photo you select probably won\'t
+        have a transparent background.  You will be asked to touch the background area to make
+        it transparent.  That\'s it!  Next time you share a photo, you can select Pinguino and
+        the IM you send will have you inserted.</p><br>
+        <b>Can I change my photo?</b>
+        <p>Sure!  Just use the menu again to select a new photo.  You will be asked to select the
+        background again just like you did with your first photo.</p>
+        ]]>
+    </string>
 </resources>

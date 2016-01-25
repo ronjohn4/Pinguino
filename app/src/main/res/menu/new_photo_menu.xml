@@ -17,8 +17,4 @@
             android:icon="@drawable/ic_help_outline_white_36pt"
             app:showAsAction="ifRoom"
             android:title="Help"/>
-      <item android:id="@+id/about"
-            android:icon="@drawable/ic_info_outline_white_36dp"
-            app:showAsAction="ifRoom"
-            android:title="About"/>
 </menu>
